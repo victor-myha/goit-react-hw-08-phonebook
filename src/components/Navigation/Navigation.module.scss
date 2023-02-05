@@ -1,0 +1,30 @@
+.navigation {
+  border-bottom: 1px solid grey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+
+  .logoText {
+    font-size: 18px;
+    font-weight: bold;
+
+    a {
+      color: #000;
+      text-decoration: none;
+    }
+  }
+
+  .menuLinks {
+    display: flex;
+    align-items: center;
+
+    .linkItem {
+      margin-left: 20px;
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}
