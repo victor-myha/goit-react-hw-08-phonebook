@@ -8,9 +8,12 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
+import { useSelector } from 'react-redux';
 
 export default function UserMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const uEmail = useSelector((state) => state.userSlice.user.email);
+
   const open = Boolean(anchorEl);
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -71,7 +74,7 @@ export default function UserMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> user.gmail.com
+          <Avatar /> {uEmail}
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>

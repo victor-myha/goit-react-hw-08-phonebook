@@ -4,9 +4,11 @@ import { Error404 } from './Error404/Error404';
 import Login from './Login/Login';
 import Navigation from './Navigation/Navigation';
 import Register from './Register/Register';
+import { useSelector } from 'react-redux';
 
 export const App = () => {
-  const uId = 'u123123123';
+  const uId = useSelector((state) => state.userSlice.user.uId);
+
   return (
     <div>
       <div>
