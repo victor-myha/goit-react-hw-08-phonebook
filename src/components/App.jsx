@@ -17,8 +17,8 @@ export const App = () => {
     const user = localStorage.getItem('user');
     dispatch(setUser(JSON.parse(user)));
     console.log('User', user);
-    if (user) navigate('/react-homework-template/contacts');
-    else navigate('/react-homework-template/login');
+    if (user) navigate('/contacts');
+    else navigate('/login');
   }, [dispatch, navigate]);
 
   return (
@@ -27,16 +27,16 @@ export const App = () => {
         <Navigation />
       </div>
       <Routes>
-        <Route path='/react-homework-template' element={<div />} />
+        <Route path='/' element={<div />} />
 
-        <Route path={'/react-homework-template/contacts'}
+        <Route path={'/contacts'}
                element={<PrivateRoute child={<Contacts />} />}
         />
         <Route
-          path='/react-homework-template/register'
+          path='/register'
           element={<Register />}
         />
-        <Route path='/react-homework-template/login' element={<Login />} />
+        <Route path='/login' element={<Login />} />
         <Route path='*' element={<Error404 />} />
       </Routes>
     </div>

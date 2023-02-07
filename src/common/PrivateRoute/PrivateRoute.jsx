@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const PrivateRoute = ({ child }) => {
   const token = useSelector((state) => state.userSlice.user?.token);
-  if (!token) return <Navigate to={'/react-homework-template/login'} />;
+  if (!token) return <Navigate to={'/login'} />;
   return child;
 };
 

@@ -42,7 +42,7 @@ const Register = () => {
   });
 
   useEffect(() => {
-    if (token && submitClicked) navigate('/react-homework-template/contacts');
+    if (token && submitClicked) navigate('/contacts');
   }, [token, submitClicked, navigate]);
 
   return (

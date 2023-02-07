@@ -16,10 +16,10 @@ const Navigation = () => {
         {!token && (
           <>
             <div className={styles.linkItem}>
-              <Link to='/react-homework-template/login'>Login</Link>
+              <Link to='/login'>Login</Link>
             </div>
             <div className={styles.linkItem}>
-              <Link to='/react-homework-template/register'>Register</Link>
+              <Link to='/register'>Register</Link>
             </div>
           </>
         )}
