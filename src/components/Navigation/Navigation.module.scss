@@ -4,15 +4,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  min-height: 51px;
 
   .logoText {
     font-size: 18px;
     font-weight: bold;
-
-    a {
-      color: #000;
-      text-decoration: none;
-    }
+    color: #000;
   }
 
   .menuLinks {
