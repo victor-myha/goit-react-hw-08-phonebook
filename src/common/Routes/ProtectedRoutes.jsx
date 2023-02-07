@@ -12,7 +12,7 @@ const ProtectedRoutes = () => {
 
   useEffect(() => {
     navigate('/');
-  }, [token]);
+  }, [token, navigate]);
 
   return (
     <>
