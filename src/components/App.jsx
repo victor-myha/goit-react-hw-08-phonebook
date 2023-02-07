@@ -19,7 +19,7 @@ export const App = () => {
     console.log('User', user);
     if (user) navigate('/react-homework-template/contacts');
     else navigate('/react-homework-template/login');
-  }, []);
+  }, [dispatch, navigate]);
 
   return (
     <div>

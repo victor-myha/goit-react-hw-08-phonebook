@@ -12,7 +12,7 @@ import { useGetContactsQuery } from '../../redux/contactsApi';
 const Contacts = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const { data, isLoading, isError } = useGetContactsQuery();
+  const { data } = useGetContactsQuery();
 
   // TODO del it
   useEffect(() => {

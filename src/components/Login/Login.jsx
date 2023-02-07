@@ -43,7 +43,7 @@ const Login = () => {
 
   useEffect(() => {
     if (token && submitClicked) navigate('/react-homework-template/contacts');
-  }, [token, submitClicked]);
+  }, [token, submitClicked, navigate]);
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Button, Snackbar, TextField } from '@mui/material';
 import { useFormik } from 'formik';
@@ -24,8 +24,7 @@ const AddContactForm = () => {
       number: undefined,
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      // dispatch(login(values));
+    onSubmit: () => {
     },
   });
 
