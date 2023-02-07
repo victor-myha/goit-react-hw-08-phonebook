@@ -16,7 +16,6 @@ const validationSchema = yup.object({
 
 const AddContactForm = () => {
   const { error } = useSelector((state) => state.userSlice);
-  useSelector((state) => state.userSlice.user?.token);
 
   const formik = useFormik({
     initialValues: {

@@ -4,8 +4,7 @@ import { register } from '../../redux/thunks';
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import styles from './Register.module.scss';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import SnackbarAlert from '../../common/SnackbarAlert/SnackbarAlert';
 
 const validationSchema = yup.object({
@@ -24,9 +23,7 @@ const validationSchema = yup.object({
 
 const Register = () => {
   const dispatch = useDispatch();
-  const [submitClicked, setSubmitClicked] = useState(false);
-  const { user: { token }, error } = useSelector((state) => state.userSlice);
-  const navigate = useNavigate();
+  const { error } = useSelector((state) => state.userSlice);
 
   const formik = useFormik({
     initialValues: {
@@ -37,13 +34,8 @@ const Register = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       dispatch(register(values));
-      setSubmitClicked(true);
     },
   });
-
-  useEffect(() => {
-    if (token && submitClicked) navigate('/contacts');
-  }, [token, submitClicked, navigate]);
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { login } from '../../redux/thunks';
@@ -6,7 +6,6 @@ import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import '../../common/commonStyles.scss';
 import styles from './Login.module.scss';
-import { useNavigate } from 'react-router-dom';
 import SnackbarAlert from '../../common/SnackbarAlert/SnackbarAlert';
 
 const validationSchema = yup.object({
@@ -22,12 +21,8 @@ const validationSchema = yup.object({
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const [submitClicked, setSubmitClicked] = useState(false);
 
   const { error } = useSelector((state) => state.userSlice);
-  const token = useSelector((state) => state.userSlice.user?.token);
 
   const formik = useFormik({
     initialValues: {
@@ -37,13 +32,8 @@ const Login = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       dispatch(login(values));
-      setSubmitClicked(true);
     },
   });
-
-  useEffect(() => {
-    if (token && submitClicked) navigate('/contacts');
-  }, [token, submitClicked, navigate]);
 
   return (
     <div>
