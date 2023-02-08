@@ -8,6 +8,7 @@ import { Error404 } from './Error404/Error404';
 import Contacts from './Contacts/Contacts';
 import Login from './Login/Login';
 import Register from './Register/Register';
+import Home from './Home/Home';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export const App = () => {
         <Navigation />
       </div>
       <Routes>
+        <Route path={'/'} element={<ProtectedRoutes element={<Home />} />} />
         <Route path={'/login'} element={<ProtectedRoutes element={<Login />} />} />
         <Route path={'/register'} element={<ProtectedRoutes element={<Register />} />} />
         <Route path={'/contacts'} element={<ProtectedRoutes isSecured element={<Contacts />} />} />
