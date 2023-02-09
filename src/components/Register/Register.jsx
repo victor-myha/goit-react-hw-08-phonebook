@@ -1,41 +1,27 @@
-import { useDispatch, useSelector } from 'react-redux';
-import * as yup from 'yup';
-import { register } from '../../redux/thunks';
-import { Button, TextField } from '@mui/material';
-import { useFormik } from 'formik';
-import styles from './Register.module.scss';
-import React from 'react';
-import SnackbarAlert from '../../common/SnackbarAlert/SnackbarAlert';
-
-const validationSchema = yup.object({
-  name: yup
-    .string('Enter your name')
-    .required('Name is required'),
-  email: yup
-    .string('Enter your email')
-    .email('Enter a valid email')
-    .required('Email is required'),
-  password: yup
-    .string('Enter your password')
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
-});
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { register } from '../../redux/thunks'
+import { Button, TextField } from '@mui/material'
+import { useFormik } from 'formik'
+import SnackbarAlert from '../../common/SnackbarAlert/SnackbarAlert'
+import styles from './Register.module.scss'
+import { generateValidationSchema } from '../../common/helpers'
 
 const Register = () => {
-  const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.userSlice);
+  const dispatch = useDispatch()
+  const { error } = useSelector(state => state.userSlice)
 
   const formik = useFormik({
     initialValues: {
       name: '',
       email: '',
-      password: '',
+      password: ''
     },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      dispatch(register(values));
-    },
-  });
+    validationSchema: generateValidationSchema(['name', 'email', 'password']),
+    onSubmit: values => {
+      dispatch(register(values))
+    }
+  })
 
   return (
     <div>
@@ -78,11 +64,9 @@ const Register = () => {
           </Button>
         </form>
       </div>
-      {
-        error && <SnackbarAlert type={'error'} message={error} />
-      }
+      {error && <SnackbarAlert type={'error'} message={error} />}
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

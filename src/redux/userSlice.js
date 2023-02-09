@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { login, register } from './thunks';
+import { fetchCurrentUser, login, register } from './thunks';
 
 const initialState = {
   user: {
@@ -47,8 +47,25 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+
+    // fetch current user
+    [fetchCurrentUser.pending](state) {
+      state.isLoading = true;
+    },
+    [fetchCurrentUser.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.user = {
+        ...action.payload,
+        token: JSON.parse(localStorage.getItem('user')).token,
+      };
+    },
+    [fetchCurrentUser.rejected](state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
 export const { setUser } = userSlice.actions;
-export default userSlice.reducer;
+export const userReducer = userSlice.reducer;

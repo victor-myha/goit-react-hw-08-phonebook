@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 
 const ProtectedRoutes = ({ isSecured = false, element }) => {
-  const token = useSelector((state) => state.userSlice.user?.token);
+  const token = useSelector(state => state.userSlice.user?.token);
 
   const isAuthorized = useMemo(() => {
     return Boolean(token);

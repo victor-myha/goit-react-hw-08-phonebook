@@ -1,43 +1,31 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import * as yup from 'yup';
-import { login } from '../../redux/thunks';
-import { Button, TextField } from '@mui/material';
-import { useFormik } from 'formik';
-import '../../common/commonStyles.scss';
-import styles from './Login.module.scss';
-import SnackbarAlert from '../../common/SnackbarAlert/SnackbarAlert';
-
-const validationSchema = yup.object({
-  email: yup
-    .string('Enter your email')
-    .email('Enter a valid email')
-    .required('Email is required'),
-  password: yup
-    .string('Enter your password')
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
-});
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../../redux/thunks'
+import { Button, TextField } from '@mui/material'
+import { useFormik } from 'formik'
+import SnackbarAlert from '../../common/SnackbarAlert/SnackbarAlert'
+import '../../common/commonStyles.scss'
+import styles from './Login.module.scss'
+import { generateValidationSchema } from '../../common/helpers'
 
 const Login = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const { error } = useSelector((state) => state.userSlice);
+  const { error } = useSelector(state => state.userSlice)
 
   const formik = useFormik({
     initialValues: {
       email: '',
-      password: '',
+      password: ''
     },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      dispatch(login(values));
-    },
-  });
+    validationSchema: generateValidationSchema(['email', 'password']),
+    onSubmit: values => {
+      dispatch(login(values))
+    }
+  })
 
   return (
     <div>
-
       <div className={styles.formContainer}>
         <h1>Login</h1>
         <form className={styles.form} onSubmit={formik.handleSubmit}>
@@ -68,11 +56,9 @@ const Login = () => {
         </form>
       </div>
 
-      {
-        error && <SnackbarAlert type={'error'} message={error} />
-      }
+      {error && <SnackbarAlert type={'error'} message={error} />}
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

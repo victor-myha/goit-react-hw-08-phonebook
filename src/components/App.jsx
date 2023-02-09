@@ -1,23 +1,21 @@
-import Navigation from './Navigation/Navigation';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setUser } from '../redux/userSlice';
-import ProtectedRoutes from '../common/Routes/ProtectedRoutes';
-import { Route, Routes } from 'react-router-dom';
-import { Error404 } from './Error404/Error404';
-import Contacts from './Contacts/Contacts';
-import Login from './Login/Login';
-import Register from './Register/Register';
-import Home from './Home/Home';
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { Route, Routes } from 'react-router-dom'
+import { Error404 } from './Error404/Error404'
+import { fetchCurrentUser } from 'redux/thunks'
+import Navigation from './Navigation/Navigation'
+import ProtectedRoutes from '../common/Routes/ProtectedRoutes'
+import Contacts from './Contacts/Contacts'
+import Login from './Login/Login'
+import Register from './Register/Register'
+import Home from './Home/Home'
 
 export const App = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    dispatch(setUser(JSON.parse(user)));
-    console.log('User', user);
-  }, [dispatch]);
+    dispatch(fetchCurrentUser())
+  }, [dispatch])
 
   return (
     <div>
@@ -32,5 +30,5 @@ export const App = () => {
         <Route path={'*'} element={<Error404 />} />
       </Routes>
     </div>
-  );
-};
+  )
+}

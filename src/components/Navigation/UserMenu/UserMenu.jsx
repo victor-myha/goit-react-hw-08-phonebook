@@ -14,7 +14,7 @@ import { setUser } from '../../../redux/userSlice';
 export default function UserMenu() {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
-  const { name, email } = useSelector((state) => state.userSlice.user);
+  const { name, email } = useSelector(state => state.userSlice.user);
 
   const open = Boolean(anchorEl);
   const handleClick = event => {
@@ -41,9 +41,7 @@ export default function UserMenu() {
             aria-haspopup='true'
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar>
-              {name[0]}
-            </Avatar>
+            <Avatar>{name && name[0]}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>

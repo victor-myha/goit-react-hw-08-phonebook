@@ -1,35 +1,32 @@
-import { useSelector } from 'react-redux';
-import * as yup from 'yup';
-import { Button, Snackbar, TextField } from '@mui/material';
-import { useFormik } from 'formik';
-import '../../../common/commonStyles.scss';
-import styles from './AddContact.module.scss';
-
-const validationSchema = yup.object({
-  name: yup
-    .string('Enter contact email')
-    .required('Name is required'),
-  number: yup
-    .number('Enter contact number')
-    .required('Number is required'),
-});
+import { useDispatch, useSelector } from 'react-redux'
+import { Button, Snackbar, TextField } from '@mui/material'
+import { useFormik } from 'formik'
+import { addContact } from '../../../redux/thunks'
+import '../../../common/commonStyles.scss'
+import styles from './AddContactForm.module.scss'
+import { generateValidationSchema } from '../../../common/helpers'
 
 const AddContactForm = () => {
-  const { error } = useSelector((state) => state.userSlice);
+  const dispatch = useDispatch()
+  const { error } = useSelector(state => state.userSlice)
 
   const formik = useFormik({
     initialValues: {
       name: '',
-      number: undefined,
+      number: ''
     },
-    validationSchema: validationSchema,
-    onSubmit: () => {
-    },
-  });
+    validationSchema: generateValidationSchema(['name', 'number']),
+    onSubmit: (values, actions) => {
+      dispatch(addContact(values))
+      actions.resetForm({
+        name: '',
+        number: ''
+      })
+    }
+  })
 
   return (
-    <div>
-
+    <>
       <div className={styles.formContainer}>
         <h1 style={{ marginTop: 0 }}>Add Contact</h1>
         <form className={styles.form} onSubmit={formik.handleSubmit}>
@@ -48,7 +45,6 @@ const AddContactForm = () => {
             id='number'
             name='number'
             label='Number'
-            type='number'
             value={formik.values.number}
             onChange={formik.handleChange}
             error={formik.touched.number && Boolean(formik.errors.number)}
@@ -59,15 +55,9 @@ const AddContactForm = () => {
           </Button>
         </form>
       </div>
-      {
-        <Snackbar
-          open={error}
-          autoHideDuration={6000}
-          message='Error'
-        />
-      }
-    </div>
-  );
-};
+      {<Snackbar open={error} autoHideDuration={6000} message='Error' />}
+    </>
+  )
+}
 
-export default AddContactForm;
+export default AddContactForm
