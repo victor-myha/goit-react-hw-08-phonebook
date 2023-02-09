@@ -41,13 +41,15 @@ const EditContactModal = ({ openEditModal, setOpenEditModal, selectedContact }) 
     }
   })
 
+  /*eslint-disable */
   useEffect(() => {
     formik.setValues({
       name: selectedContact?.name || '',
       number: selectedContact?.number || ''
     })
   }, [selectedContact])
-
+  /*eslint-enable */
+  
   return (
     <Modal
       open={openEditModal}
