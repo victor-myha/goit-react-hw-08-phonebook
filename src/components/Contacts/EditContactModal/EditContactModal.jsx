@@ -46,7 +46,7 @@ const EditContactModal = ({ openEditModal, setOpenEditModal, selectedContact }) 
       name: selectedContact?.name || '',
       number: selectedContact?.number || ''
     })
-  }, [selectedContact, formik])
+  }, [selectedContact])
 
   return (
     <Modal
